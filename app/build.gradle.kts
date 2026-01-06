@@ -95,6 +95,10 @@ dependencies {
     // DataStore
     implementation(libs.androidx.datastore.preferences)
 
+    // AndroidX Startup
+    implementation(libs.androidx.startup)
+    implementation(libs.androidx.core.splashscreen)
+
     // Retrofit
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)

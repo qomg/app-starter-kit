@@ -58,4 +58,9 @@ dependencies {
     // Debug
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Toast Controller (added)
+    api(project(":app")) {
+        // ToastController is in the app module
+    }
 }

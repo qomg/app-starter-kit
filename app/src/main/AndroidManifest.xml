@@ -19,34 +19,53 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
-            android:multiprocess="false">
+            android:multiprocess="false"
+            tools:node="merge">
 
             <meta-data
-                android:value="androidx.startup"
-                android:name="com.example.appstarterkit.startup.TimberInitializer" />
-
-            <!--<meta-data
-                android:value="androidx.startup"
-                android:name="com.example.appstarterkit.startup.WorkManagerInitializer" />-->
+                android:name="androidx.startup"
+                android:value="com.example.appstarterkit.startup.TimberInitializer" />
 
             <meta-data
-                android:value="androidx.startup"
-                android:name="com.example.appstarterkit.startup.RoomInitializer" />
+                android:name="androidx.startup"
+                android:value="com.example.appstarterkit.startup.WorkManagerInitializer" />
 
             <meta-data
-                android:value="androidx.startup"
-                android:name="com.example.appstarterkit.startup.DataStoreInitializer" />
+                android:name="androidx.startup"
+                android:value="com.example.appstarterkit.startup.RoomInitializer" />
+
+            <meta-data
+                android:name="androidx.startup"
+                android:value="com.example.appstarterkit.startup.DataStoreInitializer" />
         </provider>
 
+        <!-- Splash Screen Activity (Launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.screen.ModernSplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppStarterKit">
+            android:theme="@style/Theme.SplashScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Main Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppStarterKit"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
