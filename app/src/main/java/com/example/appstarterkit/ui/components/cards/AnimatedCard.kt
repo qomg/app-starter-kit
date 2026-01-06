@@ -6,6 +6,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,13 +51,12 @@ fun AnimatedCard(
                     isPressed = true
                     onClick()
                 },
-                indication = null
             )
             .padding(if (isPressed) 8.dp else 12.dp),
         shape = shape,
         elevation = CardDefaults.cardElevation(
             defaultElevation = elevation.dp,
-            pressedElevation = 8.dp.dp
+            pressedElevation = 8.dp
         ),
         border = border,
         colors = CardDefaults.cardColors(
@@ -83,7 +84,7 @@ fun ExpandableCard(
 ) {
     var isExpanded by remember { mutableStateOf(expanded) }
 
-    Card(
+    /*Card(
         modifier = modifier
             .fillMaxWidth()
             .animateContentSize(
@@ -141,7 +142,7 @@ fun ExpandableCard(
                 content()
             }
         }
-    }
+    }*/
 
     Card(
         modifier = Modifier

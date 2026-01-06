@@ -22,18 +22,20 @@ class ExampleRepository @Inject constructor(
     /**
      * Get all examples from local database as a Flow
      */
-    fun getAllExamples(): Flow<List<Example>> {
+    fun getAllExamples(): Flow<Result<List<Example>>> {
         return exampleDao.getAllExamples().map { entities ->
             entities.map { it.toDomainModel() }
+        }.map {
+            Result.success(it)
         }
     }
 
     /**
      * Get a single example by ID
      */
-    fun getExampleById(id: String): Flow<Example?> {
+    fun getExampleById(id: String): Flow<Example> {
         return exampleDao.getExampleById(id).map { entity ->
-            entity?.toDomainModel()
+            entity.toDomainModel()
         }
     }
 

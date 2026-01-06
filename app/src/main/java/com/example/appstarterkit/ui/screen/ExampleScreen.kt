@@ -1,8 +1,10 @@
 package com.example.appstarterkit.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,11 +17,13 @@ import com.example.appstarterkit.ui.components.AdaptiveCards
 import com.example.appstarterkit.ui.components.CardItem
 import com.example.appstarterkit.ui.components.ListDetailLayout
 import com.example.appstarterkit.ui.components.buttons.AnimatedButton
+import com.example.appstarterkit.ui.components.cards.ExpandableCard
 
 /**
  * Example Screen demonstrating adaptive layouts
  * Shows different layouts based on screen size
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExampleScreen(
     onNavigateToDetail: (String) -> Unit = {},
@@ -103,11 +107,11 @@ private fun SuccessContent(
                 listItemContent = { example, isSelected ->
                     ListItem(
                         headlineContent = { Text(example.name) },
-                        supportingContent = example.description?.let { Text(it) },
-                        selected = isSelected,
+                        supportingContent = { example.description?.let { Text(it) } },
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onNavigateToDetail(example.id) }
+                            .selectable(isSelected) { selectedId = example.id },
                     )
                 },
                 detailContent = { example ->
@@ -169,7 +173,7 @@ private fun SuccessContent(
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
-                                androidx.compose.material3.TextButton(
+                                TextButton(
                                     onClick = { onNavigateToDetail(example.id) }
                                 ) {
                                     Text("View Details")

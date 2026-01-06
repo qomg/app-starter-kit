@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -116,9 +117,3 @@ fun AnimatedNavigationDrawer(
     // For now, keeping it as a placeholder
     content(PaddingValues(0.dp))
 }
-
-/**
- * Common navigation transitions
- */
-val EnterTransition = EnterTransitionSpec
-val ExitTransition = ExitTransitionSpec

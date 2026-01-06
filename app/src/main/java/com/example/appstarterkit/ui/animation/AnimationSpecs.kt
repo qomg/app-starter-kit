@@ -2,11 +2,7 @@ package com.example.appstarterkit.ui.animation
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-
-// Easing functions
-val FastOutSlowInEasing = FastOutSlowInEasing
-val LinearOutSlowInEasing = LinearOutSlowInEasing
-val FastOutLinearInEasing = FastOutLinearInEasing
+import androidx.compose.ui.Alignment
 
 // Duration constants
 const val AnimationDurationShort = 200

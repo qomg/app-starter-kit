@@ -2,19 +2,24 @@ package com.example.appstarterkit.ui.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.example.appstarterkit.ui.components.navigation.BottomNavItem
-import com.example.appstarterkit.ui.navigation.Routes.*
 
 /**
  * Bottom Navigation Items
@@ -22,22 +27,22 @@ import com.example.appstarterkit.ui.navigation.Routes.*
  */
 val bottomNavItems = listOf(
     BottomNavItem(
-        route = HOME,
+        route = Routes.HOME,
         icon = Icons.Filled.Home,
         label = "Home"
     ),
     BottomNavItem(
-        route = EXAMPLE,
+        route = Routes.EXAMPLE,
         icon = Icons.Filled.List,
         label = "Examples"
     ),
     BottomNavItem(
-        route = SETTINGS,
+        route = Routes.SETTINGS,
         icon = Icons.Filled.Settings,
         label = "Settings"
     ),
     BottomNavItem(
-        route = ABOUT,
+        route = Routes.ABOUT,
         icon = Icons.Filled.Info,
         label = "About"
     )
@@ -47,8 +52,8 @@ val bottomNavItems = listOf(
  * Navigation Transitions
  * Defines custom enter and exit transitions for navigation
  */
-val slideInFromRight = EnterTransition
-val slideOutToLeft = ExitTransition
+val slideInFromRight = EnterTransition.None
+val slideOutToLeft = ExitTransition.None
 
 /**
  * Check if a route is currently selected

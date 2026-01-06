@@ -116,8 +116,10 @@ AppStarterKit/
 
 ### 5. 开发工具
 
-- ✅ 模块化Gradle配置
-- ✅ 统一依赖版本管理
+- ✅ **Gradle Version Catalogs** (集中式依赖和插件版本管理)
+- ✅ **Type-safe 依赖** (IDE 自动补全和类型检查)
+- ✅ **统一版本引用** (避免版本冲突)
+- ✅ **模块化配置** (支持多模块项目)
 - ✅ CI/CD配置示例
 - ✅ 代码质量检查
 - ✅ 静态代码分析
@@ -351,6 +353,9 @@ AppStarterKit/
 ✅ **已实现 AndroidX Startup** (优化启动性能)
 ✅ 已实现 DataStore (首选项存储)
 ✅ **已实现自定义懒加载** (LazyInitManager)
+✅ **已实现 Gradle Version Catalogs** (集中式版本管理)
+✅ **已更新所有 build.gradle.kts** (使用 Catalog)
+✅ **已创建完整的文档** (Startup、Adaptive、Version Catalogs)
 🚧 待实现：数据层集成（已完成基础结构）
 🚧 待实现：完整示例应用
 🚧 待实现：测试覆盖

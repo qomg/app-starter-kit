@@ -3,7 +3,6 @@ package com.example.appstarterkit.ui.screen
 import com.example.appstarterkit.domain.usecase.FetchExamplesUseCase
 import com.example.appstarterkit.domain.usecase.GetExamplesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 /**
@@ -62,16 +61,17 @@ class ExampleViewModel @Inject constructor(
                 }
             }
         ) {
-            val result = fetchExamplesUseCase(
+            fetchExamplesUseCase(
                 FetchExamplesUseCase.Params(page = 1, limit = 20)
-            )
-            result.onSuccess { examples ->
-                updateState {
-                    ExampleUiState.Success(examples)
-                }
-            }.onFailure { e ->
-                updateState {
-                    ExampleUiState.Error(e.message ?: "Unknown error")
+            ).collect {
+                it.onSuccess { examples ->
+                    updateState {
+                        ExampleUiState.Success(examples)
+                    }
+                }.onFailure { e ->
+                    updateState {
+                        ExampleUiState.Error(e.message ?: "Unknown error")
+                    }
                 }
             }
         }

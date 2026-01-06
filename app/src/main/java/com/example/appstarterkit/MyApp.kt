@@ -17,11 +17,11 @@ import timber.log.Timber
  * 4. WorkManagerInitializer - Initializes WorkManager with Hilt
  */
 @HiltAndroidApp
-class AppApplication : Application() {
+class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        instance = this
         // Timber is now initialized via Startup Initializer
         // No need to initialize it here
 
@@ -33,5 +33,10 @@ class AppApplication : Application() {
             // This can be used for debugging startup performance
             Timber.d("Debug mode: Startup performance logging enabled")
         }
+    }
+
+    companion object {
+        lateinit var instance: MyApp
+            private set
     }
 }

@@ -1,5 +1,6 @@
 package com.example.appstarterkit.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +28,9 @@ fun SettingsScreen(
 ) {
     val darkTheme by viewModel.darkTheme.collectAsState()
     val dynamicColors by viewModel.dynamicColors.collectAsState()
+
+    var notificationsEnabled by remember { mutableStateOf(true) }
+    var autoSync by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {

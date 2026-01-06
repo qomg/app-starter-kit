@@ -11,7 +11,7 @@ interface ExampleDao {
     fun getAllExamples(): Flow<List<ExampleEntity>>
 
     @Query("SELECT * FROM example_table WHERE id = :id")
-    fun getExampleById(id: String): Flow<ExampleEntity?>
+    fun getExampleById(id: String): Flow<ExampleEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExample(example: ExampleEntity)

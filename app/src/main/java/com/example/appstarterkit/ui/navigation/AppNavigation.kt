@@ -7,7 +7,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.appstarterkit.ui.navigation.Routes.*
 import com.example.appstarterkit.ui.screen.*
 
 /**
@@ -24,7 +23,7 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = HOME,
+        startDestination = Routes.HOME,
         modifier = modifier,
         enterTransition = { slideInFromRight },
         exitTransition = { slideOutToLeft },
@@ -32,29 +31,29 @@ fun AppNavigation(
         popExitTransition = { slideOutToLeft }
     ) {
         // Home Screen
-        composable(route = HOME) {
+        composable(route = Routes.HOME) {
             HomeScreen(
                 onNavigateToExample = {
-                    navController.navigate(EXAMPLE)
+                    navController.navigate(Routes.EXAMPLE)
                 },
                 onNavigateToSettings = {
-                    navController.navigate(SETTINGS)
+                    navController.navigate(Routes.SETTINGS)
                 }
             )
         }
 
         // Example Screen
-        composable(route = EXAMPLE) {
+        composable(route = Routes.EXAMPLE) {
             ExampleScreen(
                 onNavigateToDetail = { exampleId ->
-                    navController.navigate(EXAMPLE_DETAIL.replace("{exampleId}", exampleId))
+                    navController.navigate(Routes.EXAMPLE_DETAIL.replace("{exampleId}", exampleId))
                 }
             )
         }
 
         // Example Detail Screen
         composable(
-            route = EXAMPLE_DETAIL,
+            route = Routes.EXAMPLE_DETAIL,
             arguments = listOf(
                 navArgument(NavArguments.EXAMPLE_ID) {
                     type = NavType.StringType
@@ -71,16 +70,16 @@ fun AppNavigation(
         }
 
         // Settings Screen
-        composable(route = SETTINGS) {
+        composable(route = Routes.SETTINGS) {
             SettingsScreen(
                 onNavigateToAbout = {
-                    navController.navigate(ABOUT)
+                    navController.navigate(Routes.ABOUT)
                 }
             )
         }
 
         // About Screen
-        composable(route = ABOUT) {
+        composable(route = Routes.ABOUT) {
             AboutScreen(
                 onNavigateBack = {
                     navController.navigateUp()
@@ -94,5 +93,5 @@ fun AppNavigation(
  * Navigate to example detail with arguments
  */
 fun NavHostController.navigateToExampleDetail(exampleId: String) {
-    navigate(EXAMPLE_DETAIL.replace("{exampleId}", exampleId))
+    navigate(Routes.EXAMPLE_DETAIL.replace("{exampleId}", exampleId))
 }

@@ -8,6 +8,7 @@ import androidx.startup.Initializer
 import com.example.appstarterkit.data.datastore.PreferencesDataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
@@ -17,14 +18,11 @@ import timber.log.Timber
  */
 class DataStoreInitializer : Initializer<PreferencesDataStore> {
 
-    // DataStore for preferences
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "app_preferences")
-
     override fun create(context: Context): PreferencesDataStore {
         Timber.d("Initializing DataStore...")
 
-        return runBlocking(Dispatchers.IO.asCoroutineDispatcher()) {
-            PreferencesDataStore(context.dataStore).also {
+        return runBlocking(Dispatchers.IO.asExecutor().asCoroutineDispatcher()) {
+            PreferencesDataStore(context).also {
                 Timber.d("DataStore initialized")
             }
         }
@@ -38,8 +36,3 @@ class DataStoreInitializer : Initializer<PreferencesDataStore> {
         return emptyList()
     }
 }
-
-/**
- * Wrapper class for DataStore preferences
- */
-class PreferencesDataStore(val dataStore: DataStore<Preferences>)

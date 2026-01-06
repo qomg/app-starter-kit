@@ -5,7 +5,9 @@ import androidx.startup.Initializer
 import com.example.appstarterkit.data.local.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 
 /**
  * Room Database Initializer
@@ -17,7 +19,7 @@ class RoomInitializer : Initializer<AppDatabase> {
     override fun create(context: Context): AppDatabase {
         Timber.d("Initializing Room database...")
 
-        return runBlocking(Dispatchers.IO.asCoroutineDispatcher()) {
+        return runBlocking(Dispatchers.IO.asExecutor().asCoroutineDispatcher()) {
             AppDatabase.getInstance(context).also {
                 Timber.d("Room database initialized")
             }

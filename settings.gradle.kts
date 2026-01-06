@@ -6,6 +6,7 @@ pluginManagement {
     }
 }
 
+// Enable version catalog
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

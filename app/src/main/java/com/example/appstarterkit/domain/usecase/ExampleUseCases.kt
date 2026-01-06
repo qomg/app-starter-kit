@@ -2,6 +2,8 @@ package com.example.appstarterkit.domain.usecase
 
 import com.example.appstarterkit.data.repository.ExampleRepository
 import com.example.appstarterkit.domain.model.Example
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -9,7 +11,7 @@ import javax.inject.Inject
  */
 class GetExamplesUseCase @Inject constructor(
     private val repository: ExampleRepository
-) : BaseFlowUseCase<Unit, List<Example>> {
+) : BaseFlowUseCase<Unit, List<Example>>() {
 
     override fun execute(params: Unit) = repository.getAllExamples()
 }
@@ -19,7 +21,7 @@ class GetExamplesUseCase @Inject constructor(
  */
 class FetchExamplesUseCase @Inject constructor(
     private val repository: ExampleRepository
-) : BaseUseCase<FetchExamplesUseCase.Params, List<Example>> {
+) : BaseUseCase<FetchExamplesUseCase.Params, List<Example>>() {
 
     data class Params(
         val page: Int = 1,
@@ -36,9 +38,11 @@ class FetchExamplesUseCase @Inject constructor(
  */
 class GetExampleByIdUseCase @Inject constructor(
     private val repository: ExampleRepository
-) : BaseFlowUseCase<String, Example?> {
+) : BaseFlowUseCase<String, Example>() {
 
-    override fun execute(params: String) = repository.getExampleById(params)
+    override fun execute(params: String): Flow<Result<Example>> {
+        return repository.getExampleById(params).map { Result.success(it) }
+    }
 }
 
 /**
@@ -46,7 +50,7 @@ class GetExampleByIdUseCase @Inject constructor(
  */
 class SaveExampleUseCase @Inject constructor(
     private val repository: ExampleRepository
-) : BaseVoidUseCase<Example> {
+) : BaseVoidUseCase<Example>() {
 
     override suspend fun execute(params: Example): Result<Unit> {
         return try {
@@ -63,7 +67,7 @@ class SaveExampleUseCase @Inject constructor(
  */
 class DeleteExampleUseCase @Inject constructor(
     private val repository: ExampleRepository
-) : BaseVoidUseCase<String> {
+) : BaseVoidUseCase<String>() {
 
     override suspend fun execute(params: String): Result<Unit> {
         return try {

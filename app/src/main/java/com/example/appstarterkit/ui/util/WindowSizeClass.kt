@@ -1,11 +1,14 @@
 package com.example.appstarterkit.ui.util
 
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 
 /**
  * Window Size Classes
@@ -26,6 +29,7 @@ object WindowSizeClasses {
 /**
  * Get current window size class
  */
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 @ReadOnlyComposable
 fun rememberWindowSizeClass(): WindowSizeClass {
@@ -45,7 +49,7 @@ fun rememberWindowSizeClass(): WindowSizeClass {
         else -> WindowHeightSizeClass.Expanded
     }
 
-    return WindowSizeClass(widthSizeClass, heightSizeClass)
+    return WindowSizeClass.calculateFromSize(DpSize(screenWidthDp.dp, screenHeightDp.dp))
 }
 
 /**
@@ -81,6 +85,7 @@ fun getNavigationType(widthSizeClass: WindowWidthSizeClass): NavigationType {
         WindowWidthSizeClass.Compact -> NavigationType.BOTTOM_NAVIGATION
         WindowWidthSizeClass.Medium -> NavigationType.NAVIGATION_RAIL
         WindowWidthSizeClass.Expanded -> NavigationType.PERMANENT_DRAWER
+        else -> NavigationType.BOTTOM_NAVIGATION
     }
 }
 

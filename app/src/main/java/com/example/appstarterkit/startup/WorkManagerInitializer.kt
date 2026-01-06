@@ -5,27 +5,24 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.startup.Initializer
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import com.example.appstarterkit.di.WorkManagerInitializerEntryPoint
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
 /**
  * WorkManager Initializer
  * Initializes WorkManager with Hilt worker factory
  */
-class WorkManagerInitializer : Initializer<WorkManager> {
+class WorkManagerInitializer : Initializer<Unit> {
 
-    override fun create(context: Context): WorkManager {
+    override fun create(context: Context) {
         // Configure WorkManager with Hilt support
         val config = Configuration.Builder()
             .setWorkerFactory(getWorkerFactory(context))
             .build()
 
-        val workManager = WorkManager.getInstance(context)
-        workManager.initialize(context, config)
-
-        return workManager
+        WorkManager.initialize(context, config)
     }
 
     /**

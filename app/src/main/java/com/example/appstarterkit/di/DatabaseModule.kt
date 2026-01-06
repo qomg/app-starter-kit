@@ -1,9 +1,8 @@
 package com.example.appstarterkit.di
 
-import androidx.hilt.work.HiltWorkerFactory
+import com.example.appstarterkit.MyApp
 import com.example.appstarterkit.data.local.AppDatabase
 import com.example.appstarterkit.data.local.dao.ExampleDao
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,22 +26,7 @@ object DatabaseModule {
         return AppDatabase.getInstance(
             // This is a temporary solution - in production, you should
             // inject the context and get the instance that way
-            android.app.ActivityThread.currentApplication()
+            MyApp.instance //android.app.ActivityThread.currentApplication()
         ).exampleDao()
-    }
-}
-
-/**
- * WorkManager Hilt Module
- * Provides HiltWorkerFactory for WorkManager integration
- */
-@Module
-@InstallIn(SingletonComponent::class)
-object WorkManagerModule {
-
-    @Provides
-    @Singleton
-    fun provideHiltWorkerFactory(): HiltWorkerFactory {
-        return HiltWorkerFactory.getInstance()
     }
 }

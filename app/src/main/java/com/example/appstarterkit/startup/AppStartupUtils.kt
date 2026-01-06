@@ -21,7 +21,7 @@ object AppStartupConfig {
      */
     fun recordInitTime(name: String) {
         val currentTime = TimeSource.Monotonic.markNow()
-        startupTimings[name] = currentTime.toEpochMilliseconds()
+        startupTimings[name] = currentTime.elapsedNow().inWholeMilliseconds
         Timber.d("Initializer completed: $name")
     }
 

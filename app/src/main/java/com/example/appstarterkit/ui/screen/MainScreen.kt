@@ -1,10 +1,14 @@
 package com.example.appstarterkit.ui.screen
 
+import android.app.Activity
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.appstarterkit.ui.components.navigation.AdaptiveNavigationSuite
@@ -18,11 +22,12 @@ import com.example.appstarterkit.ui.navigation.Routes
  * - Medium: Navigation Rail
  * - Expanded: Permanent Navigation Drawer
  */
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
     val configuration = LocalConfiguration.current
-    val windowSizeClass = calculateWindowSizeClass(configuration)
+    val windowSizeClass = calculateWindowSizeClass(LocalContext.current as Activity)
 
     // Check if current route should show navigation
     val showNavigation = rememberShowNavigation(navController)
