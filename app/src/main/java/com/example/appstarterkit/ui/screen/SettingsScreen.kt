@@ -11,17 +11,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.appstarterkit.R
 import com.example.appstarterkit.ui.components.selection.AnimatedToggle
 
 /**
  * Settings Screen - App configuration and preferences
+ * Uses DataStore via Startup initialization
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onNavigateToAbout: () -> Unit
+    onNavigateToAbout: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val darkTheme by viewModel.darkTheme.collectAsState()
+    val dynamicColors by viewModel.dynamicColors.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -35,24 +41,20 @@ fun SettingsScreen(
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
         ) {
-            var darkMode by remember { mutableStateOf(false) }
-            var notificationsEnabled by remember { mutableStateOf(true) }
-            var autoSync by remember { mutableStateOf(false) }
-
             // Appearance Section
             SettingsSection(title = "Appearance") {
                 SettingsToggle(
                     title = "Dark Mode",
                     description = "Enable dark theme",
-                    checked = darkMode,
-                    onCheckedChange = { darkMode = it },
+                    checked = darkTheme,
+                    onCheckedChange = { viewModel.toggleDarkTheme() },
                     icon = Icons.Default.DarkMode
                 )
                 SettingsToggle(
                     title = "Dynamic Colors",
                     description = "Use Material You colors",
-                    checked = false,
-                    onCheckedChange = { /* TODO: Implement */ },
+                    checked = dynamicColors,
+                    onCheckedChange = { viewModel.toggleDynamicColors() },
                     icon = Icons.Default.Palette
                 )
             }
